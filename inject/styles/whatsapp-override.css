@@ -1,0 +1,307 @@
+/*
+ * Override visual do WhatsApp Web no estilo do app do Windows 11 (Fluent, modo escuro).
+ * Seletores documentados em inject/selectors.ts. Os tokens espelham src/styles/tokens.css.
+ * As cores de superfície só são aplicadas quando o WhatsApp está no tema escuro,
+ * para não deixar texto escuro sobre fundo escuro no tema claro.
+ */
+
+:root {
+  --wa-bg: #202020;
+  --wa-chat-bg: #2c2c2c;
+  --wa-surface-hover: #2d2d2d;
+  --wa-surface-raised: #2b2b2b;
+  --wa-border: #333333;
+  --wa-accent: #00a884;
+  --wa-accent-strong: #005a4e;
+  --wa-bubble-in: #202c33;
+  --wa-bubble-out: #005c4b;
+  --wa-text: #ffffff;
+  --wa-text-secondary: #a1a1a1;
+  --wa-scroll-thumb: #454545;
+  --wa-radius: 8px;
+  --wa-font: "Segoe UI", -apple-system, BlinkMacSystemFont, Cantarell, Ubuntu, "Noto Sans", sans-serif;
+}
+
+/* ---------- Tipografia ---------- */
+
+body,
+button,
+input,
+textarea,
+[contenteditable="true"] {
+  font-family: var(--wa-font) !important;
+}
+
+/* ---------- Barras de rolagem finas (Windows 11) ---------- */
+
+::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wa-scroll-thumb) !important;
+  border-radius: 2px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5c5c5c !important;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* ---------- Layout ocupando a janela inteira (sem margens de navegador) ---------- */
+
+.app-wrapper-web > .two,
+.app-wrapper-web > .three,
+#app [class~="two"],
+#app [class~="three"] {
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Paleta Windows 11 sobre o design system atual do WhatsApp (WDS) ---------- */
+
+/* As variáveis WDS ficam em classes do <html>; redefinidas no <body>, valem para toda a página. */
+html body.dark {
+  --WDS-app-wash: var(--wa-bg) !important;
+  --WDS-surface-default: var(--wa-bg) !important;
+  --WDS-surface-emphasized: var(--wa-bg) !important;
+  --WDS-components-surface-nav-bar: var(--wa-bg) !important;
+  --WDS-background-wash-plain: var(--wa-bg) !important;
+  --WDS-background-wash-inset: var(--wa-bg) !important;
+  --WDS-background-elevated-wash-plain: var(--wa-chat-bg) !important;
+  --WDS-background-elevated-wash-inset: var(--wa-chat-bg) !important;
+  --WDS-surface-elevated-default: var(--wa-surface-raised) !important;
+  --WDS-surface-elevated-emphasized: #333333 !important;
+  --WDS-surface-highlight: var(--wa-surface-hover) !important;
+  --WDS-components-active-list-row: var(--wa-surface-hover) !important;
+  --WDS-systems-chat-background-wallpaper: var(--wa-chat-bg) !important;
+  --WDS-systems-chat-surface-tray: var(--wa-chat-bg) !important;
+  --WDS-systems-chat-surface-composer: #383838 !important;
+  --WDS-systems-bubble-surface-incoming: var(--wa-bubble-in) !important;
+  --WDS-systems-bubble-surface-outgoing: var(--wa-bubble-out) !important;
+  --WDS-systems-bubble-surface-system: var(--wa-surface-raised) !important;
+  --WDS-systems-bubble-surface-e2e: var(--wa-surface-raised) !important;
+  --WDS-systems-bubble-surface-business: var(--wa-surface-raised) !important;
+  --WDS-accent: var(--wa-accent) !important;
+  --WDS-lines-divider: var(--wa-border) !important;
+  --WDS-content-default: var(--wa-text) !important;
+  --WDS-content-deemphasized: var(--wa-text-secondary) !important;
+}
+
+/* O brilho do logo na tela de carregamento usa a cor de fundo original fixa (#161717). */
+html body.dark [data-testid="wa-web-loading-screen"] *::after {
+  --wa-shimmer: color-mix(in srgb, var(--wa-bg) 50%, transparent);
+  background-image: linear-gradient(
+    to right,
+    var(--wa-shimmer) 0%,
+    var(--wa-shimmer) 33.33%,
+    transparent 44.1%,
+    transparent 55.8%,
+    var(--wa-shimmer) 66.66%,
+    var(--wa-shimmer) 100%
+  ) !important;
+}
+
+/* O campo de mensagem tem margem só embaixo: o rodapé precisa ter a cor da conversa para ele "flutuar". */
+html body.dark #main footer {
+  background-color: var(--wa-chat-bg) !important;
+}
+
+/* ---------- Barra de título integrada (janela sem decorações) ---------- */
+
+html.wa-native-frameless {
+  --wa-titlebar-height: 32px;
+}
+
+html.wa-native-frameless #app {
+  position: fixed !important;
+  inset: var(--wa-titlebar-height) 0 0 0 !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+#wa-native-titlebar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  height: var(--wa-titlebar-height, 32px);
+  background: var(--wa-titlebar-bg, #1d1f1e);
+  color: var(--wa-titlebar-fg, #e9edef);
+  font: 12px/1 var(--wa-font);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#wa-native-titlebar .wa-tb-title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding-left: 14px;
+  pointer-events: none;
+}
+
+#wa-native-titlebar .wa-tb-title img {
+  width: 16px;
+  height: 16px;
+}
+
+#wa-native-titlebar .wa-tb-controls {
+  display: flex;
+  height: 100%;
+}
+
+#wa-native-titlebar button {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: default;
+}
+
+#wa-native-titlebar button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#wa-native-titlebar button:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#wa-native-titlebar button.wa-tb-close:hover {
+  background: #c42b1c;
+  color: #ffffff;
+}
+
+#wa-native-titlebar button.wa-tb-close:active {
+  background: #b22a1b;
+}
+
+/* Contorno sutil no lugar da borda do sistema; some com a janela maximizada. */
+#wa-native-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+html.wa-native-maximized #wa-native-frame {
+  display: none;
+}
+
+/* Remove a faixa verde superior clássica da versão web. */
+.app-wrapper-web::before,
+.app-wrapper-web::after,
+.landing-wrapper-before {
+  display: none !important;
+}
+
+/* ---------- Tema escuro: paleta do styleguide ---------- */
+
+:is(html.dark, body.dark) {
+  /* Variáveis usadas internamente pelo WhatsApp Web (nomes podem variar entre versões). */
+  --app-background: var(--wa-bg);
+  --app-background-stripe: var(--wa-bg);
+  --background-default: var(--wa-bg);
+  --background-default-hover: var(--wa-surface-hover);
+  --background-default-active: var(--wa-surface-hover);
+  --panel-background: var(--wa-bg);
+  --panel-background-colored: var(--wa-bg);
+  --panel-header-background: var(--wa-bg);
+  --conversation-panel-background: var(--wa-chat-bg);
+  --conversation-header-background: var(--wa-bg);
+  --intro-background: var(--wa-chat-bg);
+  --search-container-background: var(--wa-bg);
+  --search-input-background: var(--wa-surface-raised);
+  --compose-panel-background: var(--wa-bg);
+  --rich-text-panel-background: var(--wa-bg);
+  --dropdown-background: var(--wa-surface-raised);
+  --dropdown-background-hover: var(--wa-surface-hover);
+  --modal-background: var(--wa-surface-raised);
+  --incoming-background: var(--wa-bubble-in);
+  --incoming-background-deeper: #1a252b;
+  --outgoing-background: var(--wa-bubble-out);
+  --outgoing-background-deeper: #00493c;
+  --border-list: var(--wa-border);
+  --border-stronger: var(--wa-border);
+  --primary: var(--wa-text);
+  --primary-strong: var(--wa-text);
+  --secondary: var(--wa-text-secondary);
+  --teal: var(--wa-accent);
+  --teal-lighter: var(--wa-accent);
+}
+
+html.dark body,
+body.dark {
+  background-color: var(--wa-bg) !important;
+  color: var(--wa-text) !important;
+}
+
+:is(html.dark, body.dark) .app-wrapper-web,
+:is(html.dark, body.dark) #app {
+  background-color: var(--wa-bg) !important;
+}
+
+:is(html.dark, body.dark) #side,
+:is(html.dark, body.dark) #side header,
+:is(html.dark, body.dark) #pane-side {
+  background-color: var(--wa-bg) !important;
+}
+
+:is(html.dark, body.dark) #main header,
+:is(html.dark, body.dark) #main footer {
+  background-color: var(--wa-bg) !important;
+  border: none !important;
+}
+
+/* ---------- Lista de conversas: hover e item ativo com barra lateral ---------- */
+
+:is(html.dark, body.dark) #pane-side [role="listitem"]:hover,
+:is(html.dark, body.dark) #pane-side [role="row"]:hover {
+  background-color: var(--wa-surface-hover) !important;
+}
+
+#pane-side [aria-selected="true"] {
+  box-shadow: inset 4px 0 0 var(--wa-accent) !important;
+}
+
+:is(html.dark, body.dark) #pane-side [aria-selected="true"] {
+  background-color: var(--wa-surface-hover) !important;
+}
+
+/* ---------- Cantos arredondados (Fluent) ---------- */
+
+#side [role="textbox"],
+#side [contenteditable="true"],
+#main footer [contenteditable="true"] {
+  border-radius: var(--wa-radius) !important;
+}
+
+[role="application"],
+[role="menu"],
+[role="dialog"] {
+  border-radius: var(--wa-radius) !important;
+}
+
+[role="application"],
+[role="menu"] {
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.26),
+    0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+}

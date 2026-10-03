@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-resize-toast"
+description = "Enables the resize_toast command without any pre-configured scope."
+commands.allow = ["resize_toast"]
+
+[[permission]]
+identifier = "deny-resize-toast"
+description = "Denies the resize_toast command without any pre-configured scope."
+commands.deny = ["resize_toast"]

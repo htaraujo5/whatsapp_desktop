@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  @apply bg-window font-sans text-text-primary antialiased select-none;
+}
+
+/* Janela dos cartões de notificação: transparente, só os cartões aparecem. */
+html.toast,
+html.toast body,
+html.toast #root {
+  height: auto;
+  background: transparent;
+  overflow: hidden;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+
+.toast-in {
+  animation: toast-in 180ms ease-out;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #454545;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

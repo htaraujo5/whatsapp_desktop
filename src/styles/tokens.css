@@ -1,0 +1,18 @@
+/* Tokens do styleguide (Windows 11, modo escuro). Espelhados em inject/styles/whatsapp-override.css. */
+@theme {
+  --color-window: #202020;
+  --color-chat: #2c2c2c;
+  --color-surface-hover: #2d2d2d;
+  --color-surface-raised: #2b2b2b;
+  --color-line: #333333;
+  --color-accent: #00a884;
+  --color-accent-hover: #06cf9c;
+  --color-accent-strong: #005a4e;
+  --color-bubble-in: #202c33;
+  --color-bubble-out: #005c4b;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a1a1a1;
+  --color-danger: #f15c6d;
+
+  --font-sans: "Segoe UI", -apple-system, BlinkMacSystemFont, Cantarell, Ubuntu, "Noto Sans", sans-serif;
+}

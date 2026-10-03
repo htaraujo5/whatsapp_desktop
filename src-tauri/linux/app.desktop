@@ -1,0 +1,14 @@
+[Desktop Entry]
+Categories=Network;InstantMessaging;Chat;
+{{#if comment}}
+Comment={{comment}}
+{{/if}}
+Exec={{exec}}
+StartupWMClass={{exec}}
+StartupNotify=true
+Icon={{icon}}
+Name={{name}}
+GenericName=Mensageiro
+Keywords=whatsapp;chat;mensagens;messenger;
+Terminal=false
+Type=Application

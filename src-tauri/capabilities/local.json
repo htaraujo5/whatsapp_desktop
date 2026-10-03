@@ -1,0 +1,19 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "local",
+  "description": "Permissões da interface local (configurações e cartões de notificação).",
+  "windows": ["settings", "toast"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-close",
+    "allow-get-settings",
+    "allow-save-settings",
+    "allow-app-info",
+    "allow-test-notification",
+    "allow-toast-items",
+    "allow-dismiss-toast",
+    "allow-resize-toast",
+    "allow-send-reply",
+    "allow-open-chat"
+  ]
+}

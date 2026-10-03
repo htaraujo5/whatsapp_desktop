@@ -1,0 +1,20 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "remote-whatsapp",
+  "description": "Permissões mínimas para o script injetado no web.whatsapp.com.",
+  "windows": ["main"],
+  "remote": {
+    "urls": ["https://web.whatsapp.com/*"]
+  },
+  "permissions": [
+    "allow-notify",
+    "allow-open-settings",
+    "allow-reply-result",
+    "allow-open-in-browser",
+    "core:window:allow-start-dragging",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-is-maximized",
+    "core:window:allow-close"
+  ]
+}

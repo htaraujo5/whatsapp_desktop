@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-default-user-agent"
+description = "Enables the default_user_agent command without any pre-configured scope."
+commands.allow = ["default_user_agent"]
+
+[[permission]]
+identifier = "deny-default-user-agent"
+description = "Denies the default_user_agent command without any pre-configured scope."
+commands.deny = ["default_user_agent"]

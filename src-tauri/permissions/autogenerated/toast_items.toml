@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-toast-items"
+description = "Enables the toast_items command without any pre-configured scope."
+commands.allow = ["toast_items"]
+
+[[permission]]
+identifier = "deny-toast-items"
+description = "Denies the toast_items command without any pre-configured scope."
+commands.deny = ["toast_items"]
